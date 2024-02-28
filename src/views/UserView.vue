@@ -6,26 +6,24 @@ import { ageFrom } from '@/utils/birth-date';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-const route = useRoute();
-const id = Number(route.params.id);
-const client = UserClient.get();
-
 const data = ref<{ user: UserResponseDTO, age: number } | null>(null);
 
-load();
+const route = useRoute();
+const id = Number(route.params.id);
 
-async function load() {
-  const user = await client.get(id);
+const client = UserClient.get();
 
-  data.value = {
-    user,
-    age: ageFrom(new Date(user.birthDate)),
-  };
-}
+client
+  .get(id)
+  .then(load);
 
 async function handlePasswordChange(change: UserPasswordUpdateDTO) {
-  const user = await client.update(id, { password: change });
+  return client
+    .update(id, { password: change })
+    .then(load);
+}
 
+function load(user: UserResponseDTO) {
   data.value = {
     user,
     age: ageFrom(new Date(user.birthDate)),
