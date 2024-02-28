@@ -7,9 +7,11 @@ const route = useRoute();
 
 <template>
   <nav class="pages-nav">
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/users" class="page-link">Usuários</RouterLink>
-    <RouterLink to="/register" class="page-link">Cadastrar</RouterLink>
+    <span class="stick-links">
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/users">Usuários</RouterLink>
+      <RouterLink to="/register">Cadastrar</RouterLink>
+    </span>
   </nav>
 
   <main class="body">
@@ -32,11 +34,17 @@ const route = useRoute();
 }
 
 .pages-nav {
-  display: flex;
-  flex-direction: column;
+  position: relative;
 }
 
 .page-link {
   cursor: pointer;
+}
+
+.stick-links {
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  top: 20px;
 }
 </style>
