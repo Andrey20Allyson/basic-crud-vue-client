@@ -1,25 +1,15 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "John Due",
-      "birthDate": "2000-1-1"
-    },
-    {
       "id": "2",
-      "name": "Jose Douglas",
-      "birthDate": "1999-12-9"
+      "name": "Jose Dougras",
+      "birthDate": "1994-05-14T00:00:00.000Z",
+      "password": "1024504"
     },
     {
       "id": "e209",
       "name": "Andrey Allyson",
       "birthDate": "2003-08-19",
-      "password": "123456"
-    },
-    {
-      "id": "1dfb",
-      "name": "Mariano Pereira",
-      "birthDate": "2000-02-14",
       "password": "123456"
     },
     {
@@ -33,6 +23,24 @@
       "name": "Norger",
       "birthDate": "1996-02-10",
       "password": "321321"
+    },
+    {
+      "id": "9ea8",
+      "name": "Roberto das Graças",
+      "birthDate": "1784-05-12",
+      "password": "gesrepkm"
+    },
+    {
+      "id": "8f1f",
+      "name": "John Due",
+      "birthDate": "2001-03-12",
+      "password": "123456"
+    },
+    {
+      "id": "9074",
+      "name": "Levi Ackeman",
+      "birthDate": "1994-04-10",
+      "password": "paradis"
     }
   ]
 }
