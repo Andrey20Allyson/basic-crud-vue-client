@@ -7,20 +7,25 @@ import { ref } from 'vue';
 const client = UserClient.get();
 const users = ref<UserResponseDTO[]>([]);
 
-loadUsers();
+client
+  .list()
+  .then(load);
 
 const info = useInfo();
 
-async function loadUsers() {
-  users.value = await client.list();
+function load(payload: UserResponseDTO[]) {
+  users.value = payload;
 }
 
 async function handleUserDelete(user: UserResponseDTO) {
   info.open(`Deletando ${user.name}`);
 
-  client.delete(user.id);
+  await client.delete(user.id).catch(() => []);
 
-  await loadUsers();
+  await client
+    .list()
+    .catch(() => [])
+    .then(load);
 }
 
 </script>
