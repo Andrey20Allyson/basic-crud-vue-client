@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useInfoModalStore } from '@/stores/info-modals';
+import { useInfo } from '@/stores/info-modals';
 import { sleep } from '@/utils/promise';
 import { ref } from 'vue';
 
-const store = useInfoModalStore();
+const store = useInfo();
 const message = ref<string | null>(null);
 const isClosing = ref<boolean>(false);
 

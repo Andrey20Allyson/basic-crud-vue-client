@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { UserClient, type UserResponseDTO } from '@/clients/user.client';
 import UserCard from '@/components/UserCard.vue';
-import { useInfoModalStore } from '@/stores/info-modals';
+import { useInfo } from '@/stores/info-modals';
 import { ref } from 'vue';
 
 const client = UserClient.get();
@@ -9,7 +9,7 @@ const users = ref<UserResponseDTO[]>([]);
 
 loadUsers();
 
-const info = useInfoModalStore();
+const info = useInfo();
 
 async function loadUsers() {
   users.value = await client.list();

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { UserClient, type UserCreateDTO } from '@/clients/user.client';
-import { useInfoModalStore } from '@/stores/info-modals';
+import { useInfo } from '@/stores/info-modals';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -14,7 +14,7 @@ const submiting = ref(false);
 const client = UserClient.get();
 
 const router = useRouter();
-const info = useInfoModalStore();
+const info = useInfo();
 
 async function submitForm() {
   if (submiting.value === true) return;
