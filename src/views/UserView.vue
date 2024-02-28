@@ -4,14 +4,25 @@ import EditableValue from '@/components/EditableValue.vue';
 import PasswordChangeForm from '@/components/PasswordChangeForm.vue';
 import { useInfo } from '@/stores/info-modals';
 import { ageFrom } from '@/utils/birth-date';
+import { AxiosError } from 'axios';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-const data = ref<{
-  user: UserResponseDTO,
-  age: number,
-  changes: UserUpdateDTO,
-} | null>(null);
+const data = ref<
+  | {
+    status: 'success'
+    user: UserResponseDTO,
+    age: number,
+    changes: UserUpdateDTO,
+  }
+  | {
+    status: 'error',
+    message: string,
+  }
+  | {
+    status: 'loading',
+  }
+>({ status: 'loading' });
 
 const route = useRoute();
 const info = useInfo();
@@ -21,7 +32,8 @@ const client = UserClient.get();
 
 client
   .get(id)
-  .then(load);
+  .then(load)
+  .catch(handleError);
 
 async function handlePasswordChange(change: UserPasswordUpdateDTO) {
   await client
@@ -33,6 +45,7 @@ async function handlePasswordChange(change: UserPasswordUpdateDTO) {
 
 function load(user: UserResponseDTO) {
   data.value = {
+    status: 'success',
     user,
     age: ageFrom(new Date(user.birthDate)),
     changes: {
@@ -40,6 +53,20 @@ function load(user: UserResponseDTO) {
       birthDate: new Date(user.birthDate),
     },
   };
+}
+
+function handleError(err: unknown) {
+  if (err instanceof AxiosError) {
+    if (err.response !== undefined) {
+      return data.value = { status: 'error', message: err.response.data.message };
+    }
+  }
+
+  if (err instanceof Error) {
+    return data.value = { status: 'error', message: err.message };
+  }
+
+  data.value = { status: 'error', message: `Ops! Ocorreu um erro` };
 }
 
 async function update(data: UserUpdateDTO): Promise<void> {
@@ -52,20 +79,20 @@ async function update(data: UserUpdateDTO): Promise<void> {
 }
 
 async function handleNameChange() {
-  if (data.value === null) return;
+  if (data.value.status !== 'success') return;
 
   await update({ name: data.value.changes.name });
 }
 
 async function handleBirthDateChange() {
-  if (data.value === null) return;
-  
+  if (data.value.status !== 'success') return;
+
   await update({ birthDate: data.value.changes.birthDate });
 }
 </script>
 
 <template>
-  <div class="body" v-if="data !== null">
+  <div class="body" v-if="data.status === 'success'">
     <section>
       <h1>Informações</h1>
 
@@ -109,8 +136,14 @@ async function handleBirthDateChange() {
     </section>
   </div>
 
-  <div v-else>
+  <div v-if="data.status === 'loading'">
     Carregando...
+  </div>
+
+  <div v-if="data.status === 'error'">
+    <h3>
+      {{ data.message }}
+    </h3>
   </div>
 </template>
 
