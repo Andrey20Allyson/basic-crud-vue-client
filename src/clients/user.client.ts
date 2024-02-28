@@ -8,20 +8,20 @@ export interface UserResponseDTO {
 }
 
 export interface UserCreateDTO {
-  readonly name: string;
-  readonly birthDate: Date;
-  readonly password: string;
+  name: string;
+  birthDate: Date;
+  password: string;
 }
 
 export interface UserPasswordUpdateDTO {
-  readonly old: string;
-  readonly new: string;
+  old: string;
+  new: string;
 }
 
 export interface UserUpdateDTO {
-  readonly name?: string;
-  readonly birthDate?: Date;
-  readonly password?: UserPasswordUpdateDTO;
+  name?: string;
+  birthDate?: Date;
+  password?: UserPasswordUpdateDTO;
 }
 
 export interface UserDeleteResponseDTO {
@@ -41,7 +41,7 @@ export abstract class UserClient {
     if (String(VITE_USER_CLIENT).toLowerCase() === 'prod') {
       return new UserClientImpl();
     }
-    
+
     return new UserClientMock();
   }
 }
