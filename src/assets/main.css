@@ -2,9 +2,13 @@
 
 #app {
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 4rem 0;
+  display: grid;
+  grid-template-columns: .3fr 1fr;
+  flex: 1;
   padding: 2rem;
   font-weight: normal;
+  gap: 1rem;
 }
 
 a,
@@ -12,7 +16,18 @@ a,
   text-decoration: none;
   color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
-  padding: 3px;
+}
+
+.green.hover-hl:hover {
+  color: hsla(160, 100%, 55%, 1);
+}
+
+.cpointer {
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 @media (hover: hover) {
@@ -24,12 +39,11 @@ a,
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
   }
 
   #app {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: .4fr 1fr;
     padding: 0 2rem;
   }
 }

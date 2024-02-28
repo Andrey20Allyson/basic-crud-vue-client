@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Due",
+      "birthDate": "2000-1-1"
+    },
+    {
+      "id": "2",
+      "name": "Jose Douglas",
+      "birthDate": "1999-12-9"
+    },
+    {
+      "id": "e209",
+      "name": "Andrey Allyson",
+      "birthDate": "2003-08-19",
+      "password": "123456"
+    },
+    {
+      "id": "1dfb",
+      "name": "Mariano Pereira",
+      "birthDate": "2000-02-14",
+      "password": "123456"
+    },
+    {
+      "id": "ec04",
+      "name": "Roberto Do Gás",
+      "birthDate": "1980-12-12",
+      "password": "murilo123"
+    },
+    {
+      "id": "9afb",
+      "name": "Norger",
+      "birthDate": "1996-02-10",
+      "password": "321321"
+    }
+  ]
+}

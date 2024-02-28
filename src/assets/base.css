@@ -48,6 +48,10 @@
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
   }
+
+  input {
+    color-scheme: dark;
+  }
 }
 
 *,
@@ -59,6 +63,7 @@
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
